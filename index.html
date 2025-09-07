@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday</title>
+  <style>
+    :root{
+      --bg1: #FFDEE9;
+      --bg2: #B5FFFC;
+      --card:#ffffffcc;
+      --accent:#ff6b81;
+      --accent2:#7b61ff;
+      --soft:#ffd6e0;
+    }
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
+      background: linear-gradient(135deg,var(--bg1),var(--bg2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+
+    .card{
+      width:100%;
+      max-width:760px;
+      background:var(--card);
+      border-radius:18px;
+      box-shadow:0 10px 30px rgba(14,20,30,0.12);
+      padding:28px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    h1{
+      margin:0 0 6px 0;
+      font-size:2.1rem;
+      letter-spacing:0.2px;
+      color:#2b2b2b;
+    }
+    p.lead{
+      margin:0 0 18px 0;
+      color:#444;
+      opacity:0.95;
+    }
+
+    .heart{
+      width:150px;height:150px;margin:18px auto 8px;
+      background: linear-gradient(135deg,var(--accent),var(--accent2));
+      clip-path: path('M12 21s-6.7-4.16-8.6-7.19C1.1 10.6 3.4 5.5 7.5 5.5c1.7 0 3.4 1.2 4.5 3 1.1-1.8 2.8-3 4.5-3 4.1 0 6.4 5.1 4.1 8.31C18.7 16.84 12 21 12 21z');
+      animation:pulse 1.8s ease-in-out infinite;
+      align-items: center;
+    }
+
+    .heart:before,.heart:after{
+      content:'';position:absolute;width:70px;height:70px;background:inherit;border-radius:50%;transform:translateY(-35px) rotate(45deg);
+    }
+    .heart:after{transform:translateX(35px) rotate(45deg);}
+    .heart svg{width:56px;height:56px;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.12));}
+
+    @keyframes pulse{
+      0%{transform:scale(1)}
+      50%{transform:scale(1.06)}
+      100%{transform:scale(1)}
+    }
+
+    .btn{
+      display:inline-block;padding:12px 18px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+      color:white;border:0;font-weight:600;cursor:pointer;font-size:1rem;box-shadow:0 8px 20px rgba(123,97,255,0.18);
+    }
+    .btn:active{transform:translateY(1px)}
+
+    .small{font-size:0.92rem;color:#333;margin-top:14px}
+
+    .surprise{
+      margin-top:18px;padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.7),rgba(255,255,255,0.55));
+      max-height:0;overflow:hidden;transition:max-height 600ms cubic-bezier(.2,.9,.2,1),padding 300ms;box-shadow:inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+    .surprise.open{max-height:420px;padding:18px}
+
+    .surprise p{margin:0 0 8px 0;color:#222}
+
+    /* Confetti bubbles */
+    .confetti{position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none;overflow:visible}
+    .confetti i{position:absolute;width:10px;height:14px;border-radius:2px;opacity:0;transform-origin:center;}
+
+    /* footer small */
+    .credit{font-size:0.8rem;color:#666;margin-top:12px}
+
+    /* responsive */
+    @media (max-width:480px){
+      .card{padding:18px}
+      h1{font-size:1.6rem}
+    }
+  </style>
+</head>
+<body>
+  <div class="card" role="main">
+    <div class="confetti" id="confetti"></div>
+
+    <div class="heart" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 20s-7-4.35-9-7.5C-0.5 7.5 6 3 8.5 6.5 10.5 9 12 11 12 11s1.5-2 3.5-4.5C18 3 24.5 7.5 21 12.5 19 15.65 12 20 12 20z" fill="#fff" opacity="0.92"/>
+      </svg>
+    </div>
+
+    <h1>Happy Birthday, Princes Dhanna!</h1>
+    <p class="lead">I made this little page just for you.</p>
+
+    <button class="btn" id="openBtn">Open</button>
+
+    <div class="surprise" id="surprise">
+      <p><strong>TO MY BABY:</strong></p>
+      <p>Alam ko magkalayo tayo sa ngayon, pero gusto kong malaman mo na lagi lang 
+        akong nandito para sayo. Handang makinig sa mga rants mo sa buhay, handang samahan ka pag umiiyak ka,
+        at handang sumoporta sayo sa lahat ng mga pangarap mo sa buhay. I hope na 
+        maging happy ka hindi lang sa Birthday mo ngayon, kundi sa bawat araw pa na darating. Lungkot ko sa part na di kita kasamang e celebrate ang birthday mo ngayon pero I hope next Birthday mo, magkasama na tayo.
+        Di ko na papahabain, baka maiyak ka na naman jan eh HAHAHAHAHA. 
+        ILOVEYOUU BABY, HAPPY HAPPY BIRTHDAY MWAMWAAAA!
+      </p>
+      <p>Your poging baby,</p>
+      <p><em>—LG</em></p>
+     
+    </div>
+  </div>
+
+  <script>
+    const btn = document.getElementById('openBtn');
+    const surprise = document.getElementById('surprise');
+    const confetti = document.getElementById('confetti');
+    let opened = false;
+
+    function rand(min,max){return Math.random()*(max-min)+min}
+
+    function burstConfetti(){
+      // create 36 pieces
+      for(let i=0;i<36;i++){
+        const el = document.createElement('i');
+        el.style.left = (50+rand(-30,30))+'%';
+        el.style.top = rand(10,30)+'%';
+        el.style.background = `linear-gradient(180deg, hsl(${~~rand(0,360)},80%,60%), hsl(${~~rand(0,360)},70%,48%))`;
+        el.style.width = (~~rand(6,14))+'px';
+        el.style.height = (~~rand(8,18))+'px';
+        confetti.appendChild(el);
+
+        const duration = rand(1200,2400);
+        const x = rand(-220,220);
+        const y = rand(220,420);
+        const rot = rand(0,720);
+
+        el.animate([
+          {transform:`translate(0,0) rotate(0deg)`, opacity:1},
+          {transform:`translate(${x}px,${y}px) rotate(${rot}deg)`, opacity:0}
+        ],{duration:duration, easing:'cubic-bezier(.2,.8,.2,1)'}).onfinish = ()=> el.remove();
+      }
+    }
+
+    btn.addEventListener('click', ()=>{
+      if(!opened){
+        surprise.classList.add('open');
+        btn.textContent = 'Close';
+        burstConfetti();
+      } else {
+        surprise.classList.remove('open');
+        btn.textContent = 'Open your surprise';
+      }
+      opened = !opened;
+    });
+  </script>
+</body>
+</html>
